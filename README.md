@@ -48,8 +48,11 @@ Privacy & Security › Open Anyway. Notarizing requires an Apple Developer ID ($
 sign with `codesign --options runtime -s "Developer ID Application: …"`, then
 `xcrun notarytool submit … --wait` and `xcrun stapler staple` on the .dmg.
 
-Self-test of the Mac app (writes `snapshot.png` and `checks.json`, then quits):
+Self-test of the Mac app: loads the demo, exports a chart and a table PNG through the real
+EXPORT menu (saved without a dialog), writes `checks.json` and `snapshot.png`, then quits:
 `TATKO_SELFTEST=/some/dir dist/Tatko.app/Contents/MacOS/Tatko`
+Add `TATKO_SELFTEST_EVAL=file.js` to run an async JS body in the app instead and save its
+string result to `eval.txt` (handy for debugging WebKit-only behaviour).
 
 There is no Windows .exe yet; Windows users use the zip. Building one from a Mac needs a
 cross-compiler (e.g. Zig), which isn't installed.

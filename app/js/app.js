@@ -858,7 +858,8 @@
     const a = document.createElement('a');
     a.href = URL.createObjectURL(blob); a.download = name;
     document.body.appendChild(a); a.click(); a.remove();
-    setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+    // Keep the data alive for a while: the Mac app reads it only after its Save dialog closes.
+    setTimeout(() => URL.revokeObjectURL(a.href), 60000);
   }
   const baseName = () => (S.ds ? S.ds.name.replace(/\.[^.]+$/, '') : 'tatko');
 
@@ -991,10 +992,12 @@
     if (!S.ds) { toast('LOAD A CSV FIRST', 'error'); SFX.play('error'); return; }
     const plot = $('#viz .plot');
     const view = S.lastView;
+    const isPlot = !!(plot && plot.data);
+    const pngLabel = isPlot ? 'CHART AS PNG' : view === 'table' ? 'TABLE AS PNG' : view === 'kpi' ? 'SCORES AS PNG' : 'IMAGE AS PNG';
     showMenu(anchor, [
       { head: 'EXPORT' },
-      { label: 'CHART AS PNG', disabled: !(plot && plot.data), action: () => Plotly.downloadImage(plot, { format: 'png', filename: baseName() + '-' + sheet().name.toLowerCase().replace(/\s+/g, '-'), scale: 2, width: plot.clientWidth, height: plot.clientHeight }) },
-      { label: 'CHART AS SVG', disabled: !(plot && plot.data), action: () => Plotly.downloadImage(plot, { format: 'svg', filename: baseName(), width: plot.clientWidth, height: plot.clientHeight }) },
+      { label: pngLabel, disabled: !isPlot && !imageSource(), action: () => runExport('png') },
+      { label: 'CHART AS SVG', disabled: !isPlot, action: () => runExport('svg') },
       { label: view === 'table' ? 'PIVOT TABLE AS CSV' : 'VIEW DATA AS CSV', disabled: view === 'empty', action: () => {
         const csv = view === 'table' && S.lastPivot ? S.lastPivot.csv() : T.toCSV(T.Charts.exportRows(S.ds, S.idx, sheet()));
         download(baseName() + '-view.csv', csv, 'text/csv');
@@ -1006,6 +1009,34 @@
         download(baseName() + '-filtered.csv', T.toCSV(rows), 'text/csv');
       } },
     ]);
+  }
+
+  /** Element whose full content is painted for table / score exports. */
+  function imageSource() { return $('#viz .pivot-wrap') || $('#viz .kpi-grid'); }
+
+  /** Build the current view as an image, in the theme's fonts and colours. */
+  async function viewImage(kind) {
+    const plot = $('#viz .plot');
+    if (plot && plot.data) {
+      if (kind === 'svg') return { blob: new Blob([(await T.Export.chartSVG(plot, S.theme)).svg], { type: 'image/svg+xml' }) };
+      return { blob: await T.Export.chartPNG(plot, S.theme) };
+    }
+    const src = imageSource();
+    if (!src) throw new Error('NOTHING TO EXPORT IN THIS VIEW');
+    return T.Export.domPNG(src, S.theme);
+  }
+
+  async function runExport(kind) {
+    toast('RENDERING ' + kind.toUpperCase() + '…');
+    try {
+      const { blob, truncated } = await viewImage(kind);
+      download(baseName() + '-' + sheet().name.toLowerCase().replace(/\s+/g, '-') + '-' + S.lastView + '.' + kind, blob);
+      toast(truncated ? 'TABLE TOO TALL FOR ONE IMAGE: EXPORTED THE TOP PART' : kind.toUpperCase() + ' EXPORTED');
+      SFX.play('drop');
+    } catch (e) {
+      console.error(e);
+      toast('EXPORT FAILED: ' + e.message, 'error'); SFX.play('error');
+    }
   }
 
   /* ================================================================ toast */
@@ -1188,7 +1219,12 @@
   const cap = (s) => s.charAt(0).toUpperCase() + s.slice(1).toLowerCase();
 
   // refresh(): re-apply filters and redraw everything (used by tests and the console).
-  T.App = { state: S, setTheme, loadDemo, setDataset, refresh: () => { refilter(); invalidate(); } };
+  T.App = {
+    state: S, setTheme, loadDemo, setDataset,
+    refresh: () => { refilter(); invalidate(); },
+    // For tests: the current view as a PNG data: URL.
+    exportPNGDataURL: async () => { const { blob } = await viewImage('png'); return new Promise((r) => { const f = new FileReader(); f.onload = () => r(f.result); f.readAsDataURL(blob); }); },
+  };
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot);
   else boot();
 })();

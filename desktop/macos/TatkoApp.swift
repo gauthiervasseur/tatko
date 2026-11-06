@@ -38,39 +38,71 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKUIDelegate, WKNaviga
 
         let appDir = Bundle.main.resourceURL!.appendingPathComponent("app", isDirectory: true)
         var page = appDir.appendingPathComponent("index.html")
-        if selfTestDir != nil, let u = URL(string: page.absoluteString + "#mute&nocrt&demo&preset=table") { page = u }
+        if selfTestDir != nil, let u = URL(string: page.absoluteString + "#mute&nocrt&demo&preset=bar&theme=arcade") { page = u }
         web.loadFileURL(page, allowingReadAccessTo: appDir)
         NSApp.activate(ignoringOtherApps: true)
     }
 
     // MARK: - Self-test (build verification only)
-    // TATKO_SELFTEST=<dir> loads the demo, writes snapshot.png + checks.json there, then quits.
+    // TATKO_SELFTEST=<dir>: loads the demo, writes checks.json, exports the chart and the
+    // table through the real EXPORT menu (saved into <dir> without a dialog), takes
+    // snapshot.png, then quits.
 
     private let selfTestDir = ProcessInfo.processInfo.environment["TATKO_SELFTEST"]
+    private var selfTestStep = 0
 
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         guard let dir = selfTestDir else { return }
         DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) {
             let js = """
             JSON.stringify({ plotly: !!window.Plotly, rows: Tatko.App.state.ds ? Tatko.App.state.ds.n : 0,
-              table: !!document.querySelector('#viz table.pivot'), broken: /SOMETHING BROKE/.test(document.body.innerText),
+              chart: !!document.querySelector('#viz .plot .main-svg'), broken: /SOMETHING BROKE/.test(document.body.innerText),
               pixelFont: document.fonts.check('12px "Press Start 2P"'), storage: (function(){ try { localStorage.setItem('t','1'); return localStorage.getItem('t') === '1'; } catch (e) { return false; } })() })
             """
             webView.evaluateJavaScript(js) { result, error in
                 let out = URL(fileURLWithPath: dir)
                 try? ((result as? String) ?? "{\"error\": \"\(String(describing: error))\"}").write(to: out.appendingPathComponent("checks.json"), atomically: true, encoding: .utf8)
-                webView.takeSnapshot(with: nil) { image, _ in
-                    if let tiff = image?.tiffRepresentation, let rep = NSBitmapImageRep(data: tiff),
-                       let png = rep.representation(using: .png, properties: [:]) {
-                        try? png.write(to: out.appendingPathComponent("snapshot.png"))
+                // TATKO_SELFTEST_EVAL=<file.js>: run an async JS body instead, save its string result.
+                if let path = ProcessInfo.processInfo.environment["TATKO_SELFTEST_EVAL"], let body = try? String(contentsOfFile: path, encoding: .utf8) {
+                    webView.callAsyncJavaScript(body, arguments: [:], in: nil, in: .page) { res in
+                        let text: String
+                        switch res { case .success(let v): text = (v as? String) ?? "\(v)"; case .failure(let e): text = "ERROR: \(e)" }
+                        try? text.write(to: out.appendingPathComponent("eval.txt"), atomically: true, encoding: .utf8)
+                        NSApp.terminate(nil)
                     }
-                    NSApp.terminate(nil)
+                    return
                 }
+                self.selfTestExport(label: "CHART AS PNG")
             }
         }
     }
 
-    func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool { true }
+    /// Clicks EXPORT, then the given menu item, exactly like a user would.
+    private func selfTestExport(label: String) {
+        let js = """
+        document.querySelector('[data-action="export"]').click();
+        setTimeout(() => { [...document.querySelectorAll('#menu .menu-item')].find(b => b.textContent.includes('\(label)')).click(); }, 300);
+        """
+        web.evaluateJavaScript(js, completionHandler: nil)
+    }
+
+    private func selfTestNext() {
+        selfTestStep += 1
+        if selfTestStep == 1 {
+            let js = "const s = Tatko.App.state.sheets[0]; s.mark = 'table'; s.opts.heat = true; Tatko.App.refresh();"
+            web.evaluateJavaScript(js) { _, _ in
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1) { self.selfTestExport(label: "TABLE AS PNG") }
+            }
+            return
+        }
+        web.takeSnapshot(with: nil) { image, _ in
+            if let dir = self.selfTestDir, let tiff = image?.tiffRepresentation, let rep = NSBitmapImageRep(data: tiff),
+               let png = rep.representation(using: .png, properties: [:]) {
+                try? png.write(to: URL(fileURLWithPath: dir).appendingPathComponent("snapshot.png"))
+            }
+            NSApp.terminate(nil)
+        }
+    }
 
     // MARK: - Menu bar (Edit menu is what makes Cmd-C / Cmd-V work in text fields)
 
@@ -180,6 +212,11 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKUIDelegate, WKNaviga
 
     func download(_ download: WKDownload, decideDestinationUsing response: URLResponse,
                   suggestedFilename: String, completionHandler: @escaping (URL?) -> Void) {
+        if let dir = selfTestDir { // self-test: save without a dialog
+            let url = URL(fileURLWithPath: dir).appendingPathComponent(suggestedFilename)
+            try? FileManager.default.removeItem(at: url)
+            completionHandler(url); return
+        }
         let panel = NSSavePanel()
         panel.nameFieldStringValue = suggestedFilename
         panel.directoryURL = FileManager.default.urls(for: .downloadsDirectory, in: .userDomainMask).first
@@ -190,7 +227,12 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKUIDelegate, WKNaviga
         }
     }
 
+    func downloadDidFinish(_ download: WKDownload) {
+        if selfTestDir != nil { DispatchQueue.main.async { self.selfTestNext() } }
+    }
+
     func download(_ download: WKDownload, didFailWithError error: Error, resumeData: Data?) {
+        if selfTestDir != nil { NSApp.terminate(nil) }
         let alert = NSAlert(error: error)
         alert.beginSheetModal(for: window, completionHandler: nil)
     }
