@@ -1,0 +1,18 @@
+/* Tatko theme: CORPORATE (light) */
+:root {
+  --tatko-theme-name: "Corporate";
+  --tatko-font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --tatko-title-font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --tatko-font-size: 13px;
+  --tatko-text-color: #0b0b0b;
+  --tatko-muted-color: #52514e;
+  --tatko-background: #fcfcfb;
+  --tatko-plot-background: #fcfcfb;
+  --tatko-grid-color: #e6e5e0;
+  --tatko-palette: #2a78d6, #eb6834, #1baf7a, #eda100, #e87ba4, #008300, #6250d6, #e34948;
+  --tatko-sequential: #cde2fb, #104281;
+  --tatko-table-header-background: #f0efec;
+  --tatko-table-header-color: #0b0b0b;
+  --tatko-table-border-color: #e6e5e0;
+  --tatko-table-total-background: #f5f4f1;
+}

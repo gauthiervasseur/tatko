@@ -1,0 +1,8 @@
+# Build output (regenerate with: /usr/bin/python3 tools/build.py)
+dist/
+website/play/
+website/download/
+
+.DS_Store
+__pycache__/
+*.pyc

@@ -1,0 +1,300 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tatko · 8-bit business intelligence for CSV files</title>
+  <meta name="description" content="Tatko turns any CSV file into charts and pivot tables by drag and drop. Free, offline, private, and styled like a 1980s arcade game.">
+  <meta property="og:title" content="Tatko · 8-bit BI for CSV files">
+  <meta property="og:description" content="Drag. Drop. Pivot. Business intelligence for one CSV file, served in glorious 8-bit.">
+  <meta property="og:image" content="assets/screens/table.jpg">
+  <link rel="icon" href="assets/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/icon-32.png">
+  <link rel="apple-touch-icon" href="assets/icon-180.png">
+  <link rel="stylesheet" href="assets/fonts.css">
+  <link rel="stylesheet" href="css/site.css">
+</head>
+<body>
+  <a class="skip" href="#download">Skip to download</a>
+
+  <header class="nav">
+    <a class="nav-brand" href="#top"><img src="assets/icon-64.png" alt="" width="32" height="32"><span>TATKO</span></a>
+    <nav class="nav-links" aria-label="Sections">
+      <a href="#features">FEATURES</a>
+      <a href="#how">HOW TO PLAY</a>
+      <a href="#themes">THEMES</a>
+      <a href="#gallery">GALLERY</a>
+      <a class="nav-cta" href="#download">DOWNLOAD</a>
+    </nav>
+  </header>
+
+  <main id="top">
+    <!-- ============================================================ HERO -->
+    <section class="hero">
+      <div class="hero-grid" aria-hidden="true"></div>
+      <div class="hero-inner">
+        <img class="hero-sprite" src="assets/icon-256.png" alt="Tatko's pixel-art player one: a smiling man with grey hair and a white shirt" width="176" height="176">
+        <p class="eyebrow blink">INSERT CSV TO CONTINUE</p>
+        <h1 class="logo">TATKO</h1>
+        <p class="tagline">Drag. Drop. Pivot.<br>Business intelligence for one CSV file, served in glorious <span class="nw">8-bit</span>.</p>
+        <div class="cta-row">
+          <a class="btn btn-primary big" href="#download">DOWNLOAD v<span data-version>1.0.0</span></a>
+          <a class="btn big" href="play/index.html#demo&preset=table">PLAY IN BROWSER ▶</a>
+        </div>
+        <p class="fineprint">FREE · WORKS OFFLINE · MAC APP, OR ANY BROWSER ON WINDOWS &amp; LINUX</p>
+      </div>
+      <figure class="cabinet">
+        <div class="cabinet-marquee">PLAYER 1 · PIXEL MART SALES</div>
+        <div class="cabinet-screen"><img src="assets/screens/table.jpg" alt="Tatko pivot table: revenue by region and category in rows, years in columns, with heat shading, subtotals and grand totals" width="1600" height="955"></div>
+      </figure>
+    </section>
+
+    <!-- ======================================================== FEATURES -->
+    <section class="section" id="features">
+      <h2 class="section-title"><span>SELECT YOUR POWER-UP</span></h2>
+      <p class="lede">Everything you need to explore a spreadsheet's worth of data, and nothing you have to configure.</p>
+      <div class="cards">
+        <article class="card c-cyan">
+          <div class="card-icon" aria-hidden="true">⇄</div>
+          <h3>DRAG &amp; DROP SHELVES</h3>
+          <p>Pick up a field on the left, drop it on <b>Columns</b>, <b>Rows</b>, <b>Values</b>, <b>Color</b> or <b>Filters</b>. The view redraws as soon as you let go (with a coin sound, if you want one).</p>
+        </article>
+        <article class="card c-yellow">
+          <div class="card-icon" aria-hidden="true">▦</div>
+          <h3>PIVOT TABLES THAT PIVOT</h3>
+          <p>Several levels of rows and columns, subtotals, grand totals, heat shading and click-to-sort. Drag pills between shelves or hit <b>⇅</b> to swap rows and columns.</p>
+        </article>
+        <article class="card c-magenta">
+          <div class="card-icon" aria-hidden="true">▙</div>
+          <h3>12 CHART TYPES</h3>
+          <p>Bar, stacked, line, area, scatter, donut, heatmap, treemap, box plot, histogram and score tiles. <b>AUTO</b> picks a sensible one, and you can export any chart as PNG or SVG.</p>
+        </article>
+        <article class="card c-green">
+          <div class="card-icon" aria-hidden="true">▼</div>
+          <h3>FILTER TABS</h3>
+          <p>Searchable checklists for categories, from/to ranges for numbers and dates. Filters apply to every sheet, and the status bar shows how many rows are still in play.</p>
+        </article>
+        <article class="card c-cyan">
+          <div class="card-icon" aria-hidden="true">✎</div>
+          <h3>YOUR BRAND, VIA CSS</h3>
+          <p>Load a <code>.css</code> file with your colors and fonts. Charts and tables follow it, so you can keep the arcade around the edges and put your house style in the middle.</p>
+        </article>
+        <article class="card c-yellow">
+          <div class="card-icon" aria-hidden="true">⚙</div>
+          <h3>SMART CSV LOADING</h3>
+          <p>Commas, semicolons, tabs or pipes. Decimal commas, thousands separators, European and US dates, and Excel's Windows encoding are all detected for you.</p>
+        </article>
+        <article class="card c-magenta">
+          <div class="card-icon" aria-hidden="true">♥</div>
+          <h3>LEVELS &amp; SAVE GAME</h3>
+          <p>Keep several sheets ("levels") side by side. Tatko remembers your layout for each file and can save it, with filters and theme, to a small <code>.tatko.json</code> file.</p>
+        </article>
+        <article class="card c-green">
+          <div class="card-icon" aria-hidden="true">⌂</div>
+          <h3>PRIVATE BY DESIGN</h3>
+          <p>Tatko runs entirely in your browser. No server, no account, no upload. Your CSV never leaves your computer.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- ======================================================= HOW TO PLAY -->
+    <section class="section alt" id="how">
+      <h2 class="section-title"><span>HOW TO PLAY</span></h2>
+      <ol class="steps">
+        <li class="step">
+          <div class="step-num">1</div>
+          <div class="step-body">
+            <h3>INSERT A CSV</h3>
+            <p>Click <b>LOAD CSV</b> or drop a file anywhere on the window. Tatko sorts the columns into <span class="tag dim">DIMENSIONS</span> (text, dates, IDs) and <span class="tag mea">MEASURES</span> (numbers).</p>
+          </div>
+          <img src="assets/screens/splash.jpg" alt="Tatko title screen with a LOAD CSV button" loading="lazy" width="1600" height="955">
+        </li>
+        <li class="step">
+          <div class="step-num">2</div>
+          <div class="step-body">
+            <h3>DRAG FIELDS ONTO SHELVES</h3>
+            <p>Category to <b>Columns</b>, Revenue to <b>Values</b>, Region to <b>Color</b>, and you have a stacked bar chart. Click a pill to switch SUM to AVERAGE, or YEAR to MONTH.</p>
+          </div>
+          <img src="assets/screens/bar.jpg" alt="Stacked bar chart of revenue by category, split by region" loading="lazy" width="1600" height="955">
+        </li>
+        <li class="step">
+          <div class="step-num">3</div>
+          <div class="step-body">
+            <h3>PIVOT, FILTER, WIN</h3>
+            <p>Choose <b>TABLE</b> for a pivot table, stack dimensions on rows and columns, turn on heat shading, and drop fields on <b>Filters</b> to zoom in on what matters.</p>
+          </div>
+          <img src="assets/screens/table.jpg" alt="Pivot table with years in columns and region and category in rows" loading="lazy" width="1600" height="955">
+        </li>
+      </ol>
+      <div class="controls">
+        <h3>CONTROLS</h3>
+        <ul>
+          <li><kbd>DRAG</kbd> field → shelf: add it</li>
+          <li><kbd>DRAG</kbd> pill off its shelf: remove it</li>
+          <li><kbd>DOUBLE-CLICK</kbd> field: add it to the best shelf</li>
+          <li><kbd>RIGHT-CLICK</kbd> field: more options</li>
+          <li><kbd>CLICK</kbd> pill: aggregation or date level</li>
+          <li><kbd>CLICK</kbd> table header: sort</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============================================================ THEMES -->
+    <section class="section" id="themes">
+      <h2 class="section-title"><span>ARCADE OUTSIDE. YOUR BRAND INSIDE.</span></h2>
+      <p class="lede">The interface is always 1985. The charts and tables follow a CSS file you choose, using your palette, your fonts and your table style.</p>
+      <div class="theme-split">
+        <figure class="shot"><img src="assets/screens/bar.jpg" alt="Stacked bar chart in the default Arcade theme" loading="lazy" width="1600" height="955"><figcaption>ARCADE (DEFAULT)</figcaption></figure>
+        <figure class="shot"><img src="assets/screens/corporate.jpg" alt="The same chart in the light Corporate theme" loading="lazy" width="1600" height="955"><figcaption>CORPORATE.CSS</figcaption></figure>
+      </div>
+      <div class="theme-code">
+        <div class="code-box">
+          <div class="code-head">my-company.css</div>
+<pre><code><span class="c">/* every line is optional */</span>
+<span class="k">@import</span> url("https://fonts.googleapis.com/css2?family=Inter");
+
+<span class="s">:root</span> {
+  <span class="p">--tatko-font-family</span>: "Inter", sans-serif;
+  <span class="p">--tatko-font-size</span>: 13px;
+  <span class="p">--tatko-text-color</span>: #0b0b0b;
+  <span class="p">--tatko-background</span>: #ffffff;
+  <span class="p">--tatko-grid-color</span>: #e6e5e0;
+  <span class="p">--tatko-palette</span>: #2a78d6, #eb6834, #1baf7a, #eda100;
+  <span class="p">--tatko-sequential</span>: #cde2fb, #104281;
+  <span class="p">--tatko-table-header-background</span>: #0b0b0b;
+  <span class="p">--tatko-table-header-color</span>: #ffffff;
+}</code></pre>
+        </div>
+        <div class="theme-notes">
+          <h3>HOW IT WORKS</h3>
+          <ul>
+            <li>Load it with <b>THEME CSS</b>, or drop the <code>.css</code> file on the window.</li>
+            <li>Tatko reads <code>--tatko-*</code> variables, plus plain <code>font-family</code>, <code>color</code> and <code>background</code> on <code>:root</code> or <code>body</code>.</li>
+            <li>Web fonts work through <code>@import</code> or <code>@font-face</code>.</li>
+            <li>Up to 8 palette colors. Each value keeps its color when you filter, and extra values fold into "Other".</li>
+            <li>The <b>THEME</b> tab previews the result and flags anything it couldn't read.</li>
+          </ul>
+          <p class="dl-themes">EXAMPLES:
+            <a href="download/arcade.css" download>arcade.css</a> ·
+            <a href="download/corporate.css" download>corporate.css</a> ·
+            <a href="download/editorial-webfont.css" download>editorial-webfont.css</a></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================== GALLERY -->
+    <section class="section alt" id="gallery">
+      <h2 class="section-title"><span>STAGE SELECT</span></h2>
+      <div class="gallery">
+        <figure class="gallery-main"><img id="galleryMain" src="assets/screens/line.jpg" alt="Line chart of monthly revenue by sales channel" width="1600" height="955"></figure>
+        <div class="gallery-thumbs" role="list">
+          <button class="thumb is-active" role="listitem" data-src="assets/screens/line.jpg" data-alt="Line chart of monthly revenue by sales channel"><img src="assets/screens/line.jpg" alt="" loading="lazy" width="1600" height="955"><span>LINE</span></button>
+          <button class="thumb" role="listitem" data-src="assets/screens/scatter.jpg" data-alt="Scatter plot of profit versus revenue per product, sized by units"><img src="assets/screens/scatter.jpg" alt="" loading="lazy" width="1600" height="955"><span>SCATTER</span></button>
+          <button class="thumb" role="listitem" data-src="assets/screens/treemap.jpg" data-alt="Treemap of revenue by category and product"><img src="assets/screens/treemap.jpg" alt="" loading="lazy" width="1600" height="955"><span>TREEMAP</span></button>
+          <button class="thumb" role="listitem" data-src="assets/screens/kpi.jpg" data-alt="Score tiles showing total revenue, profit, units and record count"><img src="assets/screens/kpi.jpg" alt="" loading="lazy" width="1600" height="955"><span>SCORE</span></button>
+          <button class="thumb" role="listitem" data-src="assets/screens/corporate-table.jpg" data-alt="Pivot table in the Corporate theme"><img src="assets/screens/corporate-table.jpg" alt="" loading="lazy" width="1600" height="955"><span>CORP TABLE</span></button>
+          <button class="thumb" role="listitem" data-src="assets/screens/splash.jpg" data-alt="Tatko title screen"><img src="assets/screens/splash.jpg" alt="" loading="lazy" width="1600" height="955"><span>TITLE</span></button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================== DOWNLOAD -->
+    <section class="section" id="download">
+      <h2 class="section-title"><span>GET TATKO</span></h2>
+      <p class="lede">Version <span data-version>1.0.0</span>. Pick your cartridge: the native Mac app, or the zip that runs in any browser on Windows, Linux or Mac.</p>
+      <div class="platforms">
+        <article class="platform p-mac">
+          <img src="assets/icon-128.png" alt="" width="80" height="80" class="dl-icon">
+          <h3>MAC APP</h3>
+          <p class="dl-meta">.DMG · <span data-size-dmg>1.8 MB</span></p>
+          <p class="platform-for">macOS 13 Ventura or later · Apple silicon &amp; Intel</p>
+          <a class="btn btn-primary big" href="download/Tatko-latest.dmg" download>DOWNLOAD .DMG ▼</a>
+          <ol class="install">
+            <li><b>Open</b> the .dmg and drag Tatko onto Applications.</li>
+            <li><b>Launch</b> Tatko. Its own window, its own Dock icon.</li>
+          </ol>
+          <details class="gatekeeper">
+            <summary>FIRST LAUNCH: "APPLE COULD NOT VERIFY…"</summary>
+            <p>Tatko isn't notarized by Apple yet, so macOS asks you to confirm once. Click <b>Done</b>, open <b>System Settings › Privacy &amp; Security</b>, scroll down and click <b>Open Anyway</b> next to Tatko. You won't be asked again.</p>
+          </details>
+        </article>
+        <article class="platform p-zip">
+          <img src="assets/icon-128.png" alt="" width="80" height="80" class="dl-icon">
+          <h3>ANY COMPUTER</h3>
+          <p class="dl-meta">.ZIP · <span data-size>1.7 MB</span></p>
+          <p class="platform-for">Windows, Linux or Mac · Chrome, Edge, Firefox or Safari 16.4+</p>
+          <a class="btn big" href="download/Tatko-latest.zip" download>DOWNLOAD .ZIP ▼</a>
+          <ol class="install">
+            <li><b>Unzip</b> it anywhere.</li>
+            <li><b>Double-click</b> <code>index.html</code> in the <code>Tatko</code> folder. It opens in your browser, no install needed.</li>
+          </ol>
+        </article>
+      </div>
+      <div class="download dl-extra">
+        <div class="dl-grid">
+          <div>
+            <h3>PRIVATE &amp; OFFLINE</h3>
+            <p>Both versions run entirely on your computer. No internet connection, no account, and your data never leaves your machine.</p>
+          </div>
+          <div>
+            <h3>IN THE BOX</h3>
+            <p>The app, a fictional 4,200-row demo dataset (<code>samples/</code>), three example theme files (<code>themes/</code>), and offline copies of plotly.js and the pixel fonts.</p>
+          </div>
+          <div>
+            <h3>EXTRAS</h3>
+            <p><a href="download/pixel-mart-sales.csv" download>Demo CSV</a> · <a href="play/index.html">Play in the browser</a> (your files stay on your computer there too).</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================ ABOUT -->
+    <section class="section about">
+      <div class="about-box">
+        <img src="assets/tatko-sprite.png" alt="" width="120" height="120" class="about-sprite">
+        <div>
+          <h2>WHY "TATKO"?</h2>
+          <p><b lang="uk">Татко</b> (TAHT-ko) is Ukrainian for <i>Daddy</i>. Every arcade needs a player one, and Tatko's is pixelled from the real daddy himself.</p>
+          <h3>FAQ</h3>
+          <dl class="faq">
+            <dt>Can I open Excel files?</dt><dd>Save the sheet as CSV first (File › Save As › CSV). Tatko works with one CSV file at a time.</dd>
+            <dt>How big can the file be?</dt><dd>Tatko keeps the whole file in memory. On a recent laptop, a 300,000-row (10 MB) file loads in under a second and pivots redraw in a fraction of a second. Much larger files depend on your computer's memory.</dd>
+            <dt>Is my data uploaded anywhere?</dt><dd>No. Everything happens inside your browser, even in the online version.</dd>
+          </dl>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p class="blink">GAME OVER? PRESS START TO PLAY AGAIN</p>
+    <p>TATKO v<span data-version>1.0.0</span> · Charts by <a href="https://plotly.com/javascript/">plotly.js</a> (MIT) · Fonts: Press Start 2P &amp; VT323 (SIL OFL)</p>
+  </footer>
+
+  <div class="crt" aria-hidden="true"></div>
+  <div id="cheat" class="cheat" hidden>+30 LIVES</div>
+
+  <script>
+    // Gallery: click a thumbnail to show it big.
+    document.querySelectorAll('.thumb').forEach(function (b) {
+      b.addEventListener('click', function () {
+        var main = document.getElementById('galleryMain');
+        main.src = b.dataset.src; main.alt = b.dataset.alt;
+        document.querySelectorAll('.thumb').forEach(function (t) { t.classList.toggle('is-active', t === b); });
+      });
+    });
+    // You know the code.
+    (function () {
+      var seq = ['ArrowUp','ArrowUp','ArrowDown','ArrowDown','ArrowLeft','ArrowRight','ArrowLeft','ArrowRight','b','a'], pos = 0;
+      window.addEventListener('keydown', function (e) {
+        pos = e.key === seq[pos] ? pos + 1 : (e.key === seq[0] ? 1 : 0);
+        if (pos === seq.length) {
+          pos = 0;
+          var c = document.getElementById('cheat'); c.hidden = false;
+          setTimeout(function () { c.hidden = true; }, 2200);
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,26 @@
+/* Tatko theme example: web fonts + plain CSS properties.
+ * @import works when the computer is online; otherwise the fallbacks are used.
+ */
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;600&family=IBM+Plex+Serif:wght@600&display=swap");
+
+:root {
+  --tatko-theme-name: "Editorial";
+  font-family: "IBM Plex Sans", "Helvetica Neue", Arial, sans-serif;   /* plain property works too */
+  --tatko-title-font-family: "IBM Plex Serif", Georgia, serif;
+  --tatko-font-size: 14px;
+  --tatko-title-font-size: 18px;
+  color: #1d1d1b;
+  background: #f7f4ee;
+  --tatko-grid-color: #e4ded2;
+  --tatko-color-1: #2a78d6;
+  --tatko-color-2: #eb6834;
+  --tatko-color-3: #1baf7a;
+  --tatko-color-4: #eda100;
+  --tatko-color-5: #e87ba4;
+  --tatko-color-6: #008300;
+  --tatko-color-7: #6250d6;
+  --tatko-color-8: #e34948;
+  --tatko-sequential: #fbe3d6, #9c3a12;
+  --tatko-table-header-background: #1d1d1b;
+  --tatko-table-header-color: #f7f4ee;
+}
