@@ -1,0 +1,19 @@
+/* Tatko theme: ARCADE (default) */
+:root {
+  --tatko-theme-name: "Arcade";
+  --tatko-font-family: "VT323", "Courier New", monospace;
+  --tatko-title-font-family: "Press Start 2P", "VT323", monospace;
+  --tatko-font-size: 19px;
+  --tatko-title-font-size: 12px;
+  --tatko-text-color: #f0efec;
+  --tatko-muted-color: #b9b2dd;
+  --tatko-background: #120b2e;
+  --tatko-plot-background: #120b2e;
+  --tatko-grid-color: #2f2660;
+  --tatko-palette: #3987e5, #d95926, #199e70, #c98500, #d55181, #008300, #9085e9, #e66767;
+  --tatko-sequential: #1d3a6e, #b7d3f6;
+  --tatko-table-header-background: #1f1550;
+  --tatko-table-header-color: #ffd400;
+  --tatko-table-border-color: #33296b;
+  --tatko-table-total-background: #1a1145;
+}

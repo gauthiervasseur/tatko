@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tatko · 8-bit BI</title>
+  <meta name="description" content="Tatko: drag-and-drop business intelligence for CSV files, in glorious 8-bit.">
+  <link rel="icon" href="assets/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/icon-32.png">
+  <link rel="apple-touch-icon" href="assets/icon-180.png">
+  <link rel="stylesheet" href="css/fonts.css">
+  <link rel="stylesheet" href="css/tatko.css">
+</head>
+<body class="crt">
+  <div id="app">
+    <header class="topbar">
+      <div class="brand">
+        <img src="assets/icon-64.png" class="brand-icon" alt="" width="36" height="36">
+        <span class="brand-name">TATKO</span>
+        <span class="brand-sub">8-BIT BI</span>
+      </div>
+      <nav class="toolbar" aria-label="Main">
+        <button class="btn btn-primary" data-action="open-csv" title="Load a CSV file (or drop one anywhere)">LOAD CSV</button>
+        <button class="btn" data-action="demo" title="Load the demo dataset">DEMO</button>
+        <button class="btn" data-action="open-theme" title="Load a CSS file with your colors and fonts">THEME CSS</button>
+        <span class="sep" aria-hidden="true"></span>
+        <button class="btn" data-action="save-game" title="Save layout, filters and theme to a file">SAVE</button>
+        <button class="btn" data-action="load-game" title="Load a saved .tatko.json layout">LOAD</button>
+        <button class="btn" data-action="export" title="Export chart or data">EXPORT</button>
+        <span class="sep" aria-hidden="true"></span>
+        <button class="btn btn-toggle" data-action="toggle-sfx" aria-pressed="true">SFX ON</button>
+        <button class="btn btn-toggle" data-action="toggle-crt" aria-pressed="true">CRT ON</button>
+        <button class="btn" data-action="help" title="How to play">?</button>
+      </nav>
+    </header>
+
+    <aside class="sidebar">
+      <div class="tabs" role="tablist">
+        <button class="tab is-active" role="tab" data-tab="fields">FIELDS</button>
+        <button class="tab" role="tab" data-tab="filters" data-drop="filters">FILTERS <span class="badge" id="filterCount"></span></button>
+        <button class="tab" role="tab" data-tab="theme">THEME</button>
+      </div>
+      <section class="panel" id="panel-fields" data-drop="trash">
+        <div class="dataset-card" id="datasetCard"></div>
+        <input class="search" id="fieldSearch" placeholder="SEARCH FIELDS" autocomplete="off" spellcheck="false">
+        <h3 class="group-title dim">DIMENSIONS</h3>
+        <ul id="dimList" class="field-list"></ul>
+        <h3 class="group-title mea">MEASURES</h3>
+        <ul id="meaList" class="field-list"></ul>
+      </section>
+      <section class="panel" id="panel-filters" data-drop="filters" hidden></section>
+      <section class="panel" id="panel-theme" hidden></section>
+    </aside>
+
+    <main class="workspace">
+      <div class="markrow">
+        <div class="marks" id="markBar" role="toolbar" aria-label="Chart type"></div>
+        <div class="viz-options" id="vizOptions"></div>
+      </div>
+      <div class="shelves">
+        <div class="shelf" data-shelf="columns">
+          <span class="shelf-label">COLUMNS</span>
+          <div class="shelf-drop" data-drop="columns"></div>
+          <button class="swap" data-swap title="Pivot: swap rows and columns">⇅</button>
+        </div>
+        <div class="shelf" data-shelf="rows">
+          <span class="shelf-label">ROWS</span>
+          <div class="shelf-drop" data-drop="rows"></div>
+        </div>
+        <div class="shelf-row">
+          <div class="shelf" data-shelf="values">
+            <span class="shelf-label">VALUES</span>
+            <div class="shelf-drop" data-drop="values"></div>
+          </div>
+          <div class="shelf narrow" data-shelf="color">
+            <span class="shelf-label">COLOR</span>
+            <div class="shelf-drop" data-drop="color"></div>
+          </div>
+          <div class="shelf" data-shelf="filters">
+            <span class="shelf-label">FILTERS</span>
+            <div class="shelf-drop" data-drop="filters"></div>
+          </div>
+        </div>
+      </div>
+      <div class="viz-frame">
+        <div id="viz" class="viz"></div>
+      </div>
+      <div class="sheet-tabs" id="sheetTabs"></div>
+    </main>
+
+    <footer class="statusbar" id="status"></footer>
+  </div>
+
+  <input type="file" id="csvInput" accept=".csv,.tsv,.txt,text/csv,text/tab-separated-values" hidden>
+  <input type="file" id="themeInput" accept=".css,text/css" hidden>
+  <input type="file" id="gameInput" accept=".json,application/json" hidden>
+
+  <div id="menu" class="popmenu" hidden></div>
+  <div id="modal" class="modal" hidden></div>
+  <div id="toast" class="toast" hidden role="status" aria-live="polite"></div>
+  <div id="loading" class="loading" hidden>
+    <div class="loading-box"><div class="loading-text">LOADING</div><div class="loading-bar"><span></span></div></div>
+  </div>
+  <div class="file-drop-overlay" aria-hidden="true"><div>DROP TO INSERT CARTRIDGE<small>.CSV DATA · .CSS THEME · .JSON SAVE</small></div></div>
+  <div class="crt-overlay" aria-hidden="true"></div>
+
+  <script src="vendor/plotly.min.js"></script>
+  <script src="samples/demo-data.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/theme.js"></script>
+  <script src="js/pivot.js"></script>
+  <script src="js/charts.js"></script>
+  <script src="js/export.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
