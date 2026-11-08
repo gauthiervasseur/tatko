@@ -552,7 +552,10 @@
       if (res.kind === 'html') return setVizHTML(res.html + (notes ? `<div class="viz-notes">${notes}</div>` : ''));
       let plot = $('.plot', el);
       if (!plot) { setVizHTML('<div class="plot-scroll"><div class="plot"></div></div><div class="viz-notes"></div>'); plot = $('.plot', el); }
-      plot.style.height = res.minHeight ? res.minHeight + 'px' : '100%';
+      const h = res.minHeight ? res.minHeight + 'px' : '100%';
+      // Plotly.react keeps the size it measured last time, so when the panel count changes the
+      // container height, start a fresh plot or small multiples get squeezed into the old height.
+      if (plot.style.height !== h) { Plotly.purge(plot); plot.style.height = h; }
       $('.viz-notes', el).innerHTML = notes;
       $('.viz-notes', el).hidden = !notes;
       Plotly.react(plot, res.data, res.layout, PLOT_CONFIG);

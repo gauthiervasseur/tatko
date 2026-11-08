@@ -104,7 +104,8 @@
       plot_bgcolor: theme.plotBackground,
       font: { family: theme.fontFamily, size: theme.fontSize, color: theme.text },
       colorway: theme.palette,
-      title: title ? { text: esc(title), x: 0.01, xanchor: 'left', y: 0.98, yanchor: 'top', font: { family: theme.titleFontFamily, size: theme.titleFontSize, color: theme.text } } : undefined,
+      // Pinned in pixels from the top: a fraction (y: 0.98) drifts into the first panel on tall small-multiple charts.
+      title: title ? { text: esc(title), x: 0.01, xanchor: 'left', yref: 'container', y: 1, yanchor: 'top', pad: { t: 16 }, font: { family: theme.titleFontFamily, size: theme.titleFontSize, color: theme.text } } : undefined,
       margin: { l: 70, r: 30, t: title ? 70 : 30, b: 60, pad: 4 },
       hoverlabel: { bgcolor: theme.background, bordercolor: theme.grid, font: { family: theme.fontFamily, size: theme.fontSize, color: theme.text } },
       legend: { font: { color: theme.text }, bgcolor: 'rgba(0,0,0,0)', itemsizing: 'constant' },
